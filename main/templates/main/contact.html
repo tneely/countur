@@ -1,0 +1,44 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% load widget_tweaks %}
+{% endblock %}
+
+{% block head_title %} | Contact{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-left">Contact Us</h1>
+    <div id="menu">
+        <form role="form" action="" method="post">
+            {% csrf_token %}
+            <div class="form-group {% if 'contact_name' in form.errors %}has-error{% endif %}">
+                {% if "contact_name" in form.errors %}
+                Name <label class="control-label" for="inputError1">{{form.errors.contact_name}}</label>
+                {% else %}
+                Name
+                {% endif %}
+                {{ form.contact_name|add_class:"form-control" }}
+            </div>
+            <div class="form-group {% if 'contact_email' in form.errors %}has-error{% endif %}">
+                {% if "contact_email" in form.errors %}
+                Email <label class="control-label" for="inputError1">{{form.errors.contact_email}}</label>
+                {% else %}
+                Email
+                {% endif %}
+                {{ form.contact_email|add_class:"form-control" }}
+            </div>
+            <div class="form-group {% if 'content' in form.errors %}has-error{% endif %}">
+                {% if "content" in form.errors %}
+                Message <label class="control-label" for="inputError1">{{form.errors.content}}</label>
+                {% else %}
+                Message
+                {% endif %}
+                {{ form.content|add_class:"form-control" }}
+            </div>
+            <div class="text-right"><button class="btn" type="submit">Submit</button></div>
+        </form>
+    </div>
+</div>
+{% endblock %}

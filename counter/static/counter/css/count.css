@@ -1,0 +1,152 @@
+#counter-space {
+	border-color: #ccc;
+	-webkit-box-shadow: 0px 2px 3px 3px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 3px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 3px rgba(0,0,0,0.2);
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.counter .name #inner-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 200px;
+}
+#create-space {
+	border-color: #ccc;
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	padding: 10px;
+}
+#create-space h1 {
+	font-variant:small-caps;
+	display: inline-block;
+	margin-left: 10px;
+}
+#create-space .editing .glyphicon {
+	top: 10px;
+	margin-bottom: 20px;
+}
+.card .editing .glyphicon {
+	top: 6px;
+	margin-bottom: 14px;
+}
+#create-space #edit-input {
+	height: 2em;
+}
+.counter .edit-input {
+	height: 30px !important;
+	width: 150px;
+}
+#create-form {
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+#create-form h3 {
+	display: inline-block;
+	margin-right: 5px;
+}
+#create-name {
+	width: 256px;
+}
+#close-create {
+	cursor: pointer;
+	margin: 5px;
+}
+.counter {
+	display: inline-block;
+	float: left;
+	margin: 10px;
+	padding: 10px;
+	background-color: #05a47b;
+	/*cursor: pointer;*/
+	border: 1px solid #fff;
+	border-radius: 10px;
+}
+.counter * {
+	margin: 0;
+}
+.counter a {
+	color: inherit;
+	text-align: inherit;
+}
+.static {
+	width: calc(100% - 20px);
+	max-width: 1200px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	float: none !important;
+	display: block;
+}
+.count-top * {
+	display: inline-block;
+}
+.glyphicon:hover {
+	cursor: pointer;
+	color: #48facc;
+}
+.icon-left {
+	margin: 5px;
+	float: left;
+}
+.icon-right {
+	margin: 5px;
+	float: right;
+}
+.increment {
+	position: absolute;
+	bottom: 0;
+	margin: 10px 0;
+	width: 100%;
+	height: 35px;
+}
+.increment * {
+	display: inline-block;
+}
+.increment input {
+	width: 100px;
+	text-align: center;
+}
+.increment .btn {
+	height: 35px;
+}
+.update-count {
+	margin: 0 25px 0 5px;
+	padding: 0 5px;
+}
+.btn-number {
+	width: 35px;
+	margin: 0 5px;
+	padding: 0;
+}
+.flipped.front {
+	display: none;
+}
+.back {
+	display: none;
+}
+.flipped.back {
+	display: inherit;
+}
+.counter-data {
+	text-align: center;
+	padding-top: 100px;
+}
+/* RESIZABLE CSS */
+.ui-icon { width: 16px; height: 16px; background-image: url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/images/ui-icons_222222_256x240.png)/*{iconsContent}*/; }
+.ui-resizable { position: relative;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px;z-index: 99999; display: block;}
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0px; }
+.ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0px; }
+.ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0px; height: 100%; }
+.ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0px; height: 100%; }
+.ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+.ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
+.glyphicon-none { color: transparent !important; cursor: default !important;}

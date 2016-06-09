@@ -1,0 +1,15 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% load widget_tweaks %}
+<link rel="stylesheet" href="{% static 'registration/css/reset.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Account Inactive</h1>
+<div class="container text-center">
+	<br>
+    <p>This account is no longer active.</p>
+</div>
+{% endblock %}

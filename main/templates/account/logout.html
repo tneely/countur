@@ -1,0 +1,25 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% endblock %}
+
+{% block head_title %} | Logout{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div id="menu" class="col-md-6 col-md-offset-3 text-center down">
+			<p>Are you sure you want to logout?</p>
+			<br>
+			<form method="post" action="{% url 'account_logout' %}">
+			  {% csrf_token %}
+			  {% if redirect_field_value %}
+			  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+			  {% endif %}
+			  <button class="btn" type="submit">Sign Out</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

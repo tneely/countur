@@ -1,0 +1,65 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% load count_filter %}
+<link rel="stylesheet" href="{% static 'counter/css/count.css' %}" type="text/css"/>
+<script src="{% static 'counter/js/count.js' %}"></script>
+<script src="{% static 'counter/js/jquery.ui.touch-punch.min.js' %}"></script>
+{% endblock %}
+
+{% block head_title %} | Counters{% endblock %}
+
+{% block content %}
+<!-- Create and Edit -->
+<div class="text-center" id="create-space">
+	<div id="create-form" class="dnone">
+		<h1 title="Close" class="glyphicon glyphicon-remove" id="close-create"></h1>
+		<h1>Create a new countur</h1>
+		<div>
+			<h3>Name:</h3>
+			<input id="create-name" type="text">
+			<br>
+			<h3>Starting value:</h3>
+			<input class="input-number" id="create-value" type="text" min="-999" max="999" value="0">
+			<br>
+		</div>
+	</div>
+	<h1	class="btn btn-create">Create New Countur</h1>
+</div>
+<!-- Counter Space -->
+<div class="container-fluid" id="counter-space">
+	{% for counter in counters %}
+	<div class="counter" style="height: {{ counter.height }}px; width: {{ counter.width }}px;">
+		<div class="card">
+			<div class="front">
+				<div class="count-top text-center">
+					<div class="icon-left"><a title="Delete" href="delete/{{ counter.id }}" onclick="return confirm('Are you sure you want to delete this counter?');"><h4 class="glyphicon glyphicon-trash"></h4></a>
+					<h4 title="Edit name" class="glyphicon glyphicon-edit edit"></h4></div>
+					<div class="name"><h2 id="inner-name">{{ counter.name }}</h2></div>
+					<div class="editing back">
+						<h3 title="Cancel" class="glyphicon glyphicon-remove-circle cancel"></h3>
+						<input type="text" class="text-center edit-input" id="{{ counter.id }}" value="{{ counter.name }}">
+						<h3 title="Confirm" class="glyphicon glyphicon-ok-circle confirm"></h3>
+					</div>
+					<div class="icon-right"><h4 class="glyphicon glyphicon-none glyphicon-stats"></h4>
+					<a title="Go to counter" href="{{ counter.id }}"><h4 class="glyphicon glyphicon-share"></h4></a></div>
+				</div>
+				<h1 class="text-center count">{{ counter.value }}</h1>
+				<div class="text-center increment">
+					<button type="button" class="btn btn-number" data-type="minus">
+						<span class="glyphicon glyphicon-minus"></span>
+					</button>
+					<button type="button" class="btn btn-number" data-type="plus">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					<input id="{{ counter.id }}" type="text" class="form-control input-number" 
+						value="{% get_latest counter.id %}" min="-999" max="999">
+					<button type="button" class="btn update-count" onclick="ajax_increment({{ counter.id }})">Increment</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}

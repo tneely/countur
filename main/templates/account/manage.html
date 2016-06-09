@@ -1,0 +1,18 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% endblock %}
+
+{% block head_title %} | Account{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1 class="text-left">Manage Account</h1>
+	<ul id="menu">
+		<li><a href="/accounts/email/">Change email</a></li>
+		<li><a href="/accounts/password/change/">Change password</a></li>
+		<li><a href="/accounts/delete/">Delete account</a></li>
+	</ul>
+</div>
+{% endblock %}
