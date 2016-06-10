@@ -6,7 +6,7 @@ from django.template.loader import get_template
 from django.core.mail import EmailMessage
 from django.template import Context
 from django.dispatch import Signal
-import sys
+
 def contact(request):
     form = ContactForm
 
