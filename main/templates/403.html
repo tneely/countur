@@ -1,0 +1,15 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% endblock %}
+
+{% block head_title %} | Error{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">403 Error: Forbidden</h1>
+    <h2 class="text-center">Are you using HTTPS? Only secure connections allowed.</h2>
+    <p class="text-center">Something wrong? Please <a href="/contact/">let us know</a>.</p>
+</div>
+{% endblock %}

@@ -26,3 +26,7 @@ class Count(models.Model):
 
 	def __str__(self):
 		return str(self.value)
+
+	class Meta:
+		# Sort by date (newest first)
+		ordering = ['-created']

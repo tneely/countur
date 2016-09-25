@@ -4,7 +4,7 @@
 {% load staticfiles%}
 {% load widget_tweaks %}
 <link rel="stylesheet" href="{% static 'registration/css/login.css' %}" type="text/css"/>
-<script src="{% static 'registration/js/login.js' %}"></script>
+<script src="{% static 'registration/js/login.min.js' %}"></script>
 {% endblock %}
 
 {% block head_title %} | Register{% endblock %}
@@ -36,7 +36,7 @@
 								enctype="multipart/form-data"role="form" style="display: none;">
 								{% csrf_token %}
 								<div class="form-group">
-									{{ loginform.login|add_class:"form-control" }} 
+									{{ loginform.login|add_class:"form-control" }}
 								</div>
 								<div class="form-group">
 									{{ loginform.password|add_class:"form-control" }}
@@ -60,8 +60,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="text-center">
-												<a href="password
-												-reset" tabindex="5" class="forgot-password">Forgot Password?</a>
+												<a href="/accounts/password/reset/" tabindex="5" class="forgot-password">Forgot Username or Password?</a>
 											</div>
 										</div>
 									</div>
@@ -74,7 +73,7 @@
 									{% if "username" in form.errors or "__all__" in form.errors %}
 									<label class="control-label" for="inputError1">{{form.errors.username}}{{form.non_field_errors}}</label>
 									{% endif %}
-									{{ form.username|add_class:"form-control" }} 
+									{{ form.username|add_class:"form-control" }}
 								</div>
 								<div class="form-group {% if "email" in form.errors %}has-error{% endif %}">
 									{% if "email" in form.errors %}
@@ -86,13 +85,13 @@
 									{% if "password1" in form.errors %}
 									<label class="control-label" for="inputError1">{{form.errors.password1}}</label>
 									{% endif %}
-									{{ form.password1|add_class:"form-control"}} 
+									{{ form.password1|add_class:"form-control"}}
 								</div>
 								<div class="form-group {% if "password2" in form.errors %}has-error{% endif %}">
 									{% if "password2" in form.errors %}
 									<label class="control-label" for="inputError1">{{form.errors.password2}}</label>
 									{% endif %}
-									{{ form.password2|add_class:"form-control"}} 
+									{{ form.password2|add_class:"form-control"}}
 								</div>
 								{% if redirect_field_value %}
 								<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

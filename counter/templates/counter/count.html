@@ -2,10 +2,10 @@
 
 {% block extra_head %}
 {% load staticfiles%}
-{% load count_filter %}
 <link rel="stylesheet" href="{% static 'counter/css/count.css' %}" type="text/css"/>
-<script src="{% static 'counter/js/count.js' %}"></script>
-<script src="{% static 'counter/js/jquery.ui.touch-punch.min.js' %}"></script>
+<script src="{% static 'counter/js/Chart.min.js' %}"></script>
+<script src="{% static 'counter/js/basic_counts.min.js' %}"></script>
+<script src="{% static 'counter/js/counts.min.js' %}"></script>
 {% endblock %}
 
 {% block head_title %} | {{ counter.name }}{% endblock %}
@@ -14,7 +14,7 @@
 <!-- Counter Title -->
 <div class="text-center" id="create-space">
 	<div class="name"><h2 title="Edit name" class="glyphicon glyphicon-edit edit"></h2>
-	<h1 id="inner-name">{{ counter.name }}</h1></div>
+	<h1 id="inner-name" class="title">{{ counter.name }}</h1></div>
 	<div class="editing back">
 		<h2 title="Cancel" class="glyphicon glyphicon-remove-circle cancel"></h2>
 		<input type="text" class="text-center edit-input" id="{{ counter.id }}" value="{{ counter.name }}">
@@ -39,17 +39,27 @@
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 					<input id="{{ counter.id }}" type="text" class="form-control input-number" 
-						value="{% get_latest counter.id %}" min="-999" max="999">
+						value="{{ counts }}" min="-999" max="999">
 					<button type="button" class="btn update-count" onclick="ajax_increment({{ counter.id }})">Increment</button>
 				</div>
 			</div>
 			<div class="back">
 				<div class="count-top text-center">
 					<div class="icon-left"><a title="Delete" href="delete/{{ counter.id }}" onclick="return confirm('Are you sure you want to delete this counter?');"><h4 class="glyphicon glyphicon-trash"></h4></a></div>
+					<div class="btn-group text-center">
+						<button type="button" id="week" class="btn active">Week</button>
+						<button type="button" id="month" class="btn">Month</button>
+						<button type="button" id="year" class="btn">Year</button>
+					</div>
 					<div class="icon-right"><h4 class="glyphicon glyphicon-time counts"></h4></div>
 				</div>
-				<div class="counter-data">
-					<h1>There's nothing here yet.</h1>
+				<div id="loading">
+					<img src="{% static 'counter/media/ajax-loader.gif' %}" id="loading-image">
+				</div>
+				<div id="charts">
+					<canvas id="charting-week"></canvas>
+					<canvas class="hidden" id="charting-month"></canvas>
+					<canvas class="hidden" id="charting-year"></canvas>
 				</div>
 			</div>
 		</div>

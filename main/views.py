@@ -3,9 +3,10 @@ from django.shortcuts import redirect
 from allauth.account.views import *
 from main.forms import ContactForm
 from django.template.loader import get_template
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.template import Context
 from django.dispatch import Signal
+from django.contrib.auth.decorators import login_required
 
 def contact(request):
     form = ContactForm
@@ -19,7 +20,7 @@ def contact(request):
             contact_email = form.cleaned_data['contact_email']
             form_content = form.cleaned_data['content']
 
-            # Email the profile with the 
+            # Email the profile with the
             # contact information
             template = get_template('contact_template.txt')
             context = Context({
@@ -29,14 +30,10 @@ def contact(request):
             })
             content = template.render(context)
 
-            email = EmailMessage(
-                "New contact message!",
+            send_mail("New Countur Contact",
                 content,
-                "Countur",
-                ['tneely.send@gmail.com'],
-                headers = {'Reply-To': contact_email }
-            )
-            email.send()
+                "no-reply@Countur.com",
+                ["tneely.send@gmail.com"])
 
             get_adapter(request).add_message(
                 request,
@@ -44,8 +41,8 @@ def contact(request):
                 'main/messages/message_sent.txt')
 
             Signal().send(sender=request.user.__class__,
-                                          request=request,
-                                          user=request.user)
+                request=request,
+                user=request.user)
 
             return redirect('contact')
 
@@ -54,12 +51,39 @@ def contact(request):
 def about(request):
     return render(request, 'main/about.html')
 
+class EmailVerify(EmailView):
+    # Override post to allow for verification checking before resending verification
+    def _action_send(self, request, *args, **kwargs):
+        email = request.POST["email"]
+        try:
+            email_address = EmailAddress.objects.get(
+                user=request.user,
+                email=email,
+            )
+            if email_address.verified:
+                get_adapter(request).add_message(
+                    request,
+                    messages.ERROR,
+                    'main/messages/'
+                    'message_already_verified.txt')
+            else:
+                get_adapter(request).add_message(
+                    request,
+                    messages.INFO,
+                    'account/messages/'
+                    'email_confirmation_sent.txt',
+                    {'email': email})
+                email_address.send_confirmation(request)
+                return HttpResponseRedirect(self.get_success_url())
+        except EmailAddress.DoesNotExist:
+            pass
+
 class JointLoginSignupView(LoginView):
     form_class = LoginForm
     signup_form  = SignupForm
     def __init__(self, **kwargs):
-        super(JointLoginSignupView, self).__init__(*kwargs)        
- 
+        super(JointLoginSignupView, self).__init__(*kwargs)
+
     def get_context_data(self, **kwargs):
         ret = super(JointLoginSignupView, self).get_context_data(**kwargs)
         ret['signupform'] = get_form_class(app_settings.FORMS, 'signup', self.signup_form)
@@ -70,13 +94,14 @@ class JointSignupLoginView(SignupView):
     signup_form  = SignupForm
     login_form  = LoginForm
     def __init__(self, **kwargs):
-        super(JointSignupLoginView, self).__init__(*kwargs)        
- 
+        super(JointSignupLoginView, self).__init__(*kwargs)
+
     def get_context_data(self, **kwargs):
         ret = super(JointSignupLoginView, self).get_context_data(**kwargs)
         ret['loginform'] = get_form_class(app_settings.FORMS, 'login', self.login_form)
         return ret
 
+@login_required
 def manage(request):
     return render(request, 'account/manage.html')
 
@@ -116,6 +141,7 @@ class DeleteView(TemplateResponseMixin, View):
                     self.request).get_logout_redirect_url(
                         self.request))
 
-delete=DeleteView.as_view()
+delete = login_required(DeleteView.as_view())
 login = JointLoginSignupView.as_view()
 signup = JointSignupLoginView.as_view()
+email = login_required(EmailVerify.as_view())

@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^rename/(?P<counter_id>\d+)/(?P<name>\w+[ \w]+)$', login_required(rename), name="rename"),
     url(r'^reorder/(?P<counter_id>\d+)/(?P<new_pos>\d+)$', login_required(reorder), name="reorder"),
     url(r'^resize/(?P<counter_id>\d+)/(?P<height>\d+)/(?P<width>\d+)$', login_required(resize), name="resize"),
-    url(r'^create/(?P<name>\w+[ \w]*)/(?P<value>-?\d*)/$', login_required(create), name="create"),
+    url(r'^create/(?P<name>\w+[ \w]*)/(?P<value>-?\d*)$', login_required(create), name="create"),
+    # Counter load functions
+    url(r'^load/(?P<counter_id>\d+)/(?P<ctype>\w+)$', login_required(chart), name="chart"),
+
 ]

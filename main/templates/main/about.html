@@ -2,7 +2,6 @@
 
 {% block extra_head %}
 {% load staticfiles%}
-<!-- <link rel="stylesheet" href="{% static 'main/css/about.css' %}" type="text/css"/> -->
 {% endblock %}
 
 {% block head_title %} | About{% endblock %}
@@ -15,20 +14,20 @@
         <hr>
         <span>
             <h2>Create counturs</h2>
-            <img src="/static/main/media/create.PNG" class="img-thumbnail">
+            <img src="{% static 'main/media/create.PNG' %}" class="img-thumbnail">
             <br><br>
-            <img src="/static/main/media/basic.PNG" class="img-thumbnail">
-            <img src="/static/main/media/increment.PNG" class="img-thumbnail">
+            <img src="{% static 'main/media/basic.PNG' %}" class="img-thumbnail">
+            <img src="{% static 'main/media/increment.PNG' %}" class="img-thumbnail">
         </span>
         <span>
             <h2>Resize and reorder!</h2>
-            <img src="/static/main/media/resize.PNG" class="img-thumbnail">
+            <img src="{% static 'main/media/resize.PNG' %}" class="img-thumbnail">
             <br><br>
-            <img src="/static/main/media/reorder.PNG" class="img-thumbnail">
+            <img src="{% static 'main/media/reorder.PNG' %}" class="img-thumbnail">
         </span>
         <span>
             <h2>Get stats and data!</h2>
-            <img src="/static/main/media/stats.PNG" class="img-thumbnail">
+            <img src="{% static 'main/media/stats.PNG' %}" class="img-thumbnail">
         </span>
     </div>
 </div>

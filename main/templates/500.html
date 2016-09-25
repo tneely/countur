@@ -1,0 +1,14 @@
+{% extends "main/template.html" %}
+
+{% block extra_head %}
+{% load staticfiles%}
+{% endblock %}
+
+{% block head_title %} | Error{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text-center">500 Error: Internal server error</h1>
+    <p class="text-center">Something wrong? Please <a href="/contact/">let us know</a>.</p>
+</div>
+{% endblock %}

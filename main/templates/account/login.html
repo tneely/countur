@@ -4,7 +4,7 @@
 {% load staticfiles%}
 {% load widget_tweaks %}
 <link rel="stylesheet" href="{% static 'registration/css/login.css' %}" type="text/css"/>
-<script src="{% static 'registration/js/login.js' %}"></script>
+<script src="{% static 'registration/js/login.min.js' %}"></script>
 {% endblock %}
 
 {% block head_title %} | Login{% endblock %}
@@ -39,7 +39,7 @@
 									{% if "login" in form.errors or "__all__" in form.errors %}
 									<label class="control-label" for="inputError1">{{form.errors.login}}{{form.non_field_errors}}</label>
 									{% endif %}
-									{{ form.login|add_class:"form-control" }} 
+									{{ form.login|add_class:"form-control" }}
 								</div>
 								<div class="form-group {% if "password" in form.errors or "__all__" in form.errors %}has-error{% endif %}">
 									{% if "password" in form.errors %}
@@ -66,7 +66,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="text-center">
-												<a href="accounts/password/reset/" tabindex="5" class="forgot-password">Forgot Password?</a>
+												<a href="/accounts/password/reset/" tabindex="5" class="forgot-password">Forgot Username or Password?</a>
 											</div>
 										</div>
 									</div>
@@ -76,16 +76,16 @@
 								enctype="multipart/form-data" role="form" style="display: none;">
 								{% csrf_token %}
 								<div class="form-group">
-									{{ signupform.username|add_class:"form-control" }} 
+									{{ signupform.username|add_class:"form-control" }}
 								</div>
 								<div class="form-group">
-									{{ signupform.email|add_class:"form-control" }} 
+									{{ signupform.email|add_class:"form-control" }}
 								</div>
 								<div class="form-group">
-									{{ signupform.password1|add_class:"form-control" }} 
+									{{ signupform.password1|add_class:"form-control" }}
 								</div>
 								<div class="form-group">
-									{{ signupform.password2|add_class:"form-control" }} 
+									{{ signupform.password2|add_class:"form-control" }}
 								</div>
 								{% if redirect_field_value %}
 								<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
